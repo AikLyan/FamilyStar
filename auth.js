@@ -1,25 +1,62 @@
 import { db } from "./firebase.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 window.login = async function () {
 
-  const user = document.getElementById("username").value.trim();
-  const pass = document.getElementById("password").value.trim();
+  const username = document
+    .getElementById("username")
+    .value
+    .trim();
 
-  if (!user || !pass) return alert("Fill all fields");
+  const password = document
+    .getElementById("password")
+    .value
+    .trim();
 
-  const snap = await getDoc(doc(db, "users", user));
+  if (!username || !password) {
+    alert("Please fill all fields");
+    return;
+  }
 
-  if (!snap.exists()) return alert("User not found");
+  try {
 
-  const data = snap.data();
+    const userRef = doc(db, "users", username);
 
-  if (data.password !== pass) return alert("Wrong password");
+    const userSnap = await getDoc(userRef);
 
-  localStorage.setItem("user", user);
-  localStorage.setItem("role", data.role || "user");
+    if (!userSnap.exists()) {
+      alert("User not found");
+      return;
+    }
 
-  location.href = data.role === "admin"
-    ? "admin-home.html"
-    : "home.html";
+    const data = userSnap.data();
+
+    if (data.password !== password) {
+      alert("Wrong password");
+      return;
+    }
+
+    /* SAVE LOGIN */
+    localStorage.setItem("user", username);
+    localStorage.setItem("role", data.role || "user");
+
+    /* REDIRECT */
+    if ((data.role || "user") === "admin") {
+      window.location.href = "admin-home.html";
+    } else {
+      window.location.href = "home.html";
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Login Error : " + error.message);
+
+  }
+
 };
