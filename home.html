@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Star</title>
+
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@1" />
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui;}
+
+body{
+background:#f8fafc;
+padding-bottom:90px;
+}
+
+.header{
+background:linear-gradient(135deg,#1e3a8a,#2563eb);
+padding:20px;
+color:white;
+text-align:center;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+}
+
+.balance-box{
+width:92%;
+margin:20px auto;
+padding:22px;
+border-radius:22px;
+background:white;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+position:relative;
+}
+
+#username{
+font-size:18px;
+font-weight:bold;
+color:#111827;
+}
+
+#balance{
+font-size:34px;
+font-weight:bold;
+color:#1e3a8a;
+margin-top:10px;
+}
+
+#point{
+position:absolute;
+right:12px;
+bottom:10px;
+font-size:13px;
+background:#e0e7ff;
+padding:4px 10px;
+border-radius:10px;
+color:#1e3a8a;
+font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN CHECK FIXED -->
+<script>
+const username = localStorage.getItem("username");
+
+// ❗ FIX: safe redirect
+if(!username){
+  window.location.href = "index.html";
+}
+</script>
+
+<div class="header">
+  <h2>Family Star</h2>
+</div>
+
+<div class="balance-box">
+  <div id="username">Loading...</div>
+  <div id="balance">0 MMK</div>
+  <div id="point">0 PT</div>
+</div>
+
+<!-- FIXED home.js -->
+<script src="home.js"></script>
+
+</body>
+</html>
