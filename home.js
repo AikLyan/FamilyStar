@@ -1,38 +1,19 @@
-import { db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-window.login = async function () {
+onAuthStateChanged(auth, async (user) => {
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  if (!username || !password) {
-    alert("Fill all fields");
+  if (!user) {
+    location.href = "index.html";
     return;
   }
 
-  const ref = doc(db, "users", username);
-  const snap = await getDoc(ref);
-
-  if (!snap.exists()) {
-    alert("User not found");
-    return;
-  }
+  const snap = await getDoc(doc(db, "users", user.uid));
 
   const data = snap.data();
 
-  if (data.password !== password) {
-    alert("Wrong password");
-    return;
-  }
-
-  localStorage.setItem("user", username);
-  localStorage.setItem("role", data.role || "user");
-
-  alert("Login Success");
-
-  window.location.href =
-    data.role === "admin"
-      ? "admin-home.html"
-      : "home.html";
-};
+  document.getElementById("username").innerText = data.email;
+  document.getElementById("balance").innerText = (data.balance || 0) + " MMK";
+  document.getElementById("point").innerText = (data.point || 0) + " PT";
+});
