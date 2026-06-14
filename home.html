@@ -5,88 +5,222 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Family Star</title>
 
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@1" />
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui;}
-
-body{
-background:#f8fafc;
-padding-bottom:90px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui;
 }
 
+body{
+background:#f3f6ff;
+padding-bottom:80px;
+}
+
+/* HEADER */
 .header{
-background:linear-gradient(135deg,#1e3a8a,#2563eb);
-padding:20px;
+background:#2563eb;
 color:white;
+padding:22px;
 text-align:center;
 border-bottom-left-radius:25px;
 border-bottom-right-radius:25px;
 }
 
-.balance-box{
+/* USER CARD */
+.card{
 width:92%;
-margin:20px auto;
-padding:22px;
-border-radius:22px;
+margin:15px auto;
 background:white;
+border-radius:20px;
+padding:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
 position:relative;
 }
 
 #username{
-font-size:18px;
+font-size:20px;
 font-weight:bold;
-color:#111827;
 }
 
 #balance{
-font-size:34px;
+font-size:36px;
+color:#1d4ed8;
 font-weight:bold;
-color:#1e3a8a;
 margin-top:10px;
 }
 
 #point{
 position:absolute;
 right:12px;
-bottom:10px;
-font-size:13px;
+bottom:12px;
+background:#dbeafe;
+padding:5px 10px;
+border-radius:12px;
+font-size:12px;
+color:#1d4ed8;
+}
+
+/* ADS SLIDER */
+.slider{
+width:92%;
+margin:15px auto;
+overflow:hidden;
+border-radius:15px;
+}
+
+.slides{
+display:flex;
+width:300%;
+animation:slide 9s infinite;
+}
+
+.slide{
+width:100%;
+flex-shrink:0;
+padding:20px;
+color:white;
+font-weight:bold;
+text-align:center;
+font-size:18px;
+}
+
+.s1{background:#ef4444;}
+.s2{background:#10b981;}
+.s3{background:#f59e0b;}
+
+@keyframes slide{
+0%{transform:translateX(0);}
+33%{transform:translateX(-100%);}
+66%{transform:translateX(-200%);}
+100%{transform:translateX(0);}
+}
+
+/* MENU */
+.menu{
+width:92%;
+margin:20px auto;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.item{
+background:white;
+padding:20px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+}
+
+.circle{
+width:60px;
+height:60px;
+margin:0 auto 10px;
+border-radius:50%;
 background:#e0e7ff;
-padding:4px 10px;
-border-radius:10px;
-color:#1e3a8a;
-font-weight:600;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+}
+
+/* FOOTER */
+.footer{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px;
+box-shadow:0 -5px 15px rgba(0,0,0,0.08);
+}
+
+.footer div{
+font-size:12px;
+text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN CHECK FIXED -->
 <script>
-const username = localStorage.getItem("username");
-
-// ❗ FIX: safe redirect
-if(!username){
-  window.location.href = "index.html";
+const user = localStorage.getItem("username");
+if(!user){
+window.location.href="index.html";
 }
 </script>
 
 <div class="header">
-  <h2>Family Star</h2>
+<h2>🌟 Family Star</h2>
 </div>
 
-<div class="balance-box">
-  <div id="username">Loading...</div>
-  <div id="balance">0 MMK</div>
-  <div id="point">0 PT</div>
+<div class="card">
+<div id="username">Loading...</div>
+<div id="balance">0 MMK</div>
+<div id="point">0 PT</div>
 </div>
 
-<!-- FIXED home.js -->
+<!-- ADS SLIDER (3 seconds auto) -->
+<div class="slider">
+<div class="slides">
+
+<div class="slide s1">🔥 Special Offer Today</div>
+<div class="slide s2">💰 Earn Money in App</div>
+<div class="slide s3">🚀 Fast Delivery Service</div>
+
+</div>
+</div>
+
+<!-- MENU -->
+<div class="menu">
+
+<div class="item">
+<div class="circle">🚗</div>
+Ride
+</div>
+
+<div class="item">
+<div class="circle">💰</div>
+Wallet
+</div>
+
+<div class="item">
+<div class="circle">📦</div>
+Delivery
+</div>
+
+<div class="item">
+<div class="circle">🎫</div>
+Ticket
+</div>
+
+<div class="item">
+<div class="circle">🍔</div>
+Food
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+<div>🏠 Home</div>
+<div>💰 Wallet</div>
+<div>🛒 Orders</div>
+<div>👤 Profile</div>
+</div>
+
 <script src="home.js"></script>
+
+<script>
+document.getElementById("username").innerText =
+"Welcome " + localStorage.getItem("username");
+</script>
 
 </body>
 </html>
