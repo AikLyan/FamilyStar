@@ -1,34 +1,23 @@
 import { db } from "./firebase.js";
-
-import {
-  doc,
-  getDoc,
-  addDoc,
-  collection,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { doc, getDoc, addDoc, collection, updateDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const productId = localStorage.getItem("productId");
 const user = localStorage.getItem("user");
 
 let productData;
 
-/* LOAD PRODUCT */
 async function load() {
 
   const snap = await getDoc(doc(db, "product", productId));
-
   productData = snap.data();
 
   document.getElementById("checkout").innerHTML = `
     <h3>${productData.name}</h3>
-    <p>${productData.price} MMK</p>
+    <p>${productData.price}</p>
     <button onclick="order()">Confirm</button>
   `;
-
 }
 
-/* ORDER */
 window.order = async function () {
 
   const userRef = doc(db, "users", user);
