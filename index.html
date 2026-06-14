@@ -166,55 +166,36 @@ body{
   align-items:center;
   height:100vh;
   margin:0;
-}
-
-.box{
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  width:300px;
-}
-
-input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
-
-button{
-  width:100%;
-  padding:10px;
-  background:#1e3a8a;
-  color:white;
-  border:none;
-  border-radius:8px;
-}
-</style>
-
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>FamilyStar - Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="box">
+<header class="topbar">
+  <div class="logo">
+    <span class="family">Family</span><span class="star">Star</span>
+  </div>
+</header>
 
-<h2>Login</h2>
+<h2>Welcome User</h2>
 
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-<div class="register" style="margin-top:10px;">
-<a href="register.html">Create Account</a>
+<div class="grid">
+  <div class="box">Users</div>
+  <div class="box">Wallet</div>
+  <div class="box">Services</div>
+  <div class="box">Reports</div>
 </div>
 
-<div class="version" style="margin-top:10px; font-size:12px;">
-Family Star v1.0
-</div>
-
-</div>
-
-<script type="module" src="auth.js"></script>
+<script>
+  // simple guard
+  if (localStorage.getItem("role") !== "user") {
+    window.location.href = "login.html";
+  }
+</script>
 
 </body>
-</html>
+  </html>
