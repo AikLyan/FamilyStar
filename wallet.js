@@ -7,18 +7,24 @@ window.sendRequest = async function () {
 
   const amount = Number(document.getElementById("amount").value);
   const method = document.getElementById("method").value;
+  const senderNumber = document.getElementById("senderNumber").value;
+  const txn = document.getElementById("txn").value;
+  const digit = document.getElementById("digit").value;
 
-  if (!amount || !method) return alert("Fill all fields");
+  if (!amount || !method || !senderNumber || !txn || !digit) {
+    alert("Fill all fields");
+    return;
+  }
 
   await addDoc(collection(db, "users", user, "walletRequests"), {
     amount,
     method,
-    senderNumber: document.getElementById("senderNumber").value,
-    txn: document.getElementById("txn").value,
-    digit: document.getElementById("digit").value,
+    senderNumber,
+    txn,
+    digit,
     status: "pending",
     createdAt: Date.now()
   });
 
-  alert("Sent");
+  alert("Request Sent");
 };
