@@ -1,33 +1,32 @@
-import { auth, db } from "./firebase.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 window.register = async function () {
 
-  const email = document.getElementById("username").value; // email use
-  const password = document.getElementById("password").value;
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  if (!email || !password) {
+  if (!username || !password) {
     alert("Fill all fields");
     return;
   }
 
-  try {
+  const ref = doc(db, "users", username);
+  const snap = await getDoc(ref);
 
-    const userCred = await createUserWithEmailAndPassword(auth, email, password);
-
-    await setDoc(doc(db, "users", userCred.user.uid), {
-      email,
-      role: "user",
-      balance: 0,
-      point: 0,
-      createdAt: Date.now()
-    });
-
-    alert("Register Success");
-    location.href = "index.html";
-
-  } catch (e) {
-    alert(e.message);
+  if (snap.exists()) {
+    alert("User already exists");
+    return;
   }
+
+  await setDoc(ref, {
+    username,
+    password,
+    role: "user",
+    balance: 0,
+    point: 0
+  });
+
+  alert("Register Success");
+  location.href = "index.html";
 };
