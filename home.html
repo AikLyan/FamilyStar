@@ -123,8 +123,111 @@ border-radius:50%;
 background:#e0e7ff;
 display:flex;
 justify-content:center;
-align-items:center;
-font-size:24px;
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Star</title>
+
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui;
+}
+
+body{
+background:#eef2ff;
+padding-bottom:80px;
+}
+
+/* HEADER */
+.header{
+background:#1e40af;
+color:white;
+padding:22px;
+text-align:center;
+font-weight:bold;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+}
+
+/* CARD */
+.card{
+width:92%;
+margin:15px auto;
+background:linear-gradient(135deg,#2563eb,#1e3a8a);
+color:white;
+padding:22px;
+border-radius:20px;
+position:relative;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+#username{
+font-size:18px;
+opacity:0.9;
+}
+
+#balance{
+font-size:40px;
+font-weight:bold;
+margin-top:10px;
+}
+
+#point{
+position:absolute;
+right:12px;
+bottom:12px;
+background:rgba(255,255,255,0.2);
+padding:5px 10px;
+border-radius:10px;
+font-size:12px;
+}
+
+/* ADS SLIDER */
+.ads{
+width:92%;
+margin:15px auto;
+background:white;
+padding:15px;
+border-radius:15px;
+text-align:center;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+animation:fade 9s infinite;
+}
+
+@keyframes fade{
+0%{opacity:1;}
+33%{opacity:0.5;}
+66%{opacity:1;}
+}
+
+/* MENU */
+.menu{
+width:92%;
+margin:20px auto;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.item{
+background:white;
+padding:18px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.item:hover{
+transform:scale(1.05);
 }
 
 /* FOOTER */
@@ -138,11 +241,7 @@ display:flex;
 justify-content:space-around;
 padding:10px;
 box-shadow:0 -5px 15px rgba(0,0,0,0.08);
-}
-
-.footer div{
 font-size:12px;
-text-align:center;
 }
 </style>
 </head>
@@ -157,7 +256,7 @@ window.location.href="index.html";
 </script>
 
 <div class="header">
-<h2>🌟 Family Star</h2>
+🌟 Family Star
 </div>
 
 <div class="card">
@@ -166,43 +265,38 @@ window.location.href="index.html";
 <div id="point">0 PT</div>
 </div>
 
-<!-- ADS SLIDER (3 seconds auto) -->
-<div class="slider">
-<div class="slides">
+<!-- ADS -->
+<div class="ads" id="ads">🔥 Welcome Bonus Available</div>
 
-<div class="slide s1">🔥 Special Offer Today</div>
-<div class="slide s2">💰 Earn Money in App</div>
-<div class="slide s3">🚀 Fast Delivery Service</div>
-
-</div>
-</div>
-
-<!-- MENU -->
+<!-- MENU (LOTTIE) -->
 <div class="menu">
 
 <div class="item">
-<div class="circle">🚗</div>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jtbfg2nb.json"
+background="transparent" speed="1"
+style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
 Ride
 </div>
 
 <div class="item">
-<div class="circle">💰</div>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_5tkzkblw.json"
+background="transparent" speed="1"
+style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
 Wallet
 </div>
 
 <div class="item">
-<div class="circle">📦</div>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json"
+background="transparent" speed="1"
+style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
 Delivery
 </div>
 
 <div class="item">
-<div class="circle">🎫</div>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_touohxv0.json"
+background="transparent" speed="1"
+style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
 Ticket
-</div>
-
-<div class="item">
-<div class="circle">🍔</div>
-Food
 </div>
 
 </div>
@@ -220,6 +314,19 @@ Food
 <script>
 document.getElementById("username").innerText =
 "Welcome " + localStorage.getItem("username");
+
+/* ADS ROTATION */
+const ads = [
+"🔥 Welcome Bonus Available",
+"💰 Earn Daily Rewards",
+"🚀 Fast Delivery System"
+];
+
+let i = 0;
+setInterval(()=>{
+i = (i+1)%ads.length;
+document.getElementById("ads").innerText = ads[i];
+},3000);
 </script>
 
 </body>
