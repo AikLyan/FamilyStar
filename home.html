@@ -105,69 +105,47 @@ color:#1d4ed8;
 
 /* FOOTER */
 .footer{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:10px;
-font-size:12px;
-box-shadow:0 -5px 15px rgba(0,0,0,0.08);
-}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <script>
-const user = localStorage.getItem("username");
-if(!user){
+if(localStorage.getItem("role") !== "user"){
 window.location.href="index.html";
 }
 </script>
 
 <div class="header">
-🌟 Family Star
+
+<div class="logo">
+  <span class="family">Family</span>
+  <span class="star">Star
+    <span class="badge">★</span>
+  </span>
+</div>
+
 </div>
 
 <div class="card">
-<div id="username">Loading...</div>
+<div id="username"></div>
 <div id="balance">0 MMK</div>
-<div id="point">0 PT</div>
 </div>
 
-<!-- MENU -->
 <div class="menu">
 
-<div class="item">
-<div class="icon"><span class="material-symbols-rounded">directions_car</span></div>
-Ride
-</div>
+<div class="item">🚗 Ride</div>
+<div class="item">💰 Wallet</div>
+<div class="item">📦 Delivery</div>
+<div class="item">🎫 Ticket</div>
 
-<div class="item">
-<div class="icon"><span class="material-symbols-rounded">account_balance_wallet</span></div>
-Wallet
-</div>
-
-<div class="item">
-<div class="icon"><span class="material-symbols-rounded">local_shipping</span></div>
-Delivery
-</div>
-
-<div class="item">
-<div class="icon"><span class="material-symbols-rounded">confirmation_number</span></div>
-Ticket
-</div>
-
-</div>
-
-<div class="footer">
-<div>Home</div>
-<div>Wallet</div>
-<div>Orders</div>
-<div>Profile</div>
 </div>
 
 <script>
@@ -176,4 +154,4 @@ document.getElementById("username").innerText =
 </script>
 
 </body>
-</html>
+  </html>
