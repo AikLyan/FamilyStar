@@ -1,43 +1,23 @@
-import { db } from "./firebase.js";
-
-import {
-  doc,
-  setDoc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { auth, db } from "./firebase.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 window.register = async function () {
 
-  const username = document
-    .getElementById("username")
-    .value
-    .trim();
+  const email = document.getElementById("username").value; // email use
+  const password = document.getElementById("password").value;
 
-  const password = document
-    .getElementById("password")
-    .value
-    .trim();
-
-  if (!username || !password) {
-    alert("Please fill all fields");
+  if (!email || !password) {
+    alert("Fill all fields");
     return;
   }
 
   try {
 
-    // Check existing user
-    const userRef = doc(db, "users", username);
-    const userSnap = await getDoc(userRef);
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (userSnap.exists()) {
-      alert("Username already exists");
-      return;
-    }
-
-    // Create new user
-    await setDoc(userRef, {
-      username: username,
-      password: password,
+    await setDoc(doc(db, "users", userCred.user.uid), {
+      email,
       role: "user",
       balance: 0,
       point: 0,
@@ -45,15 +25,9 @@ window.register = async function () {
     });
 
     alert("Register Success");
+    location.href = "index.html";
 
-    window.location.href = "index.html";
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert("Register Error : " + error.message);
-
+  } catch (e) {
+    alert(e.message);
   }
-
 };
