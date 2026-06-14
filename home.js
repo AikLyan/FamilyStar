@@ -1,54 +1,38 @@
 import { db } from "./firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-import {
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+window.login = async function () {
 
-const user = localStorage.getItem("user");
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-/* LOGIN CHECK */
-if (!user) {
-  window.location.href = "index.html";
-  throw new Error("User not logged in");
-}
-
-/* LOAD USER INFO */
-async function loadUser() {
-
-  try {
-
-    const ref = doc(db, "users", user);
-
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) {
-
-      document.getElementById("username").innerText = user;
-      document.getElementById("balance").innerText = "0 MMK";
-      document.getElementById("point").innerText = "0 PT";
-
-      return;
-    }
-
-    const data = snap.data();
-
-    document.getElementById("username").innerText = user;
-
-    document.getElementById("balance").innerText =
-      (data.balance || 0) + " MMK";
-
-    document.getElementById("point").innerText =
-      (data.point || 0) + " PT";
-
-  } catch (err) {
-
-    console.error(err);
-
-    alert("Failed to load user data");
-
+  if (!username || !password) {
+    alert("Fill all fields");
+    return;
   }
 
-}
+  const ref = doc(db, "users", username);
+  const snap = await getDoc(ref);
 
-loadUser();
+  if (!snap.exists()) {
+    alert("User not found");
+    return;
+  }
+
+  const data = snap.data();
+
+  if (data.password !== password) {
+    alert("Wrong password");
+    return;
+  }
+
+  localStorage.setItem("user", username);
+  localStorage.setItem("role", data.role || "user");
+
+  alert("Login Success");
+
+  window.location.href =
+    data.role === "admin"
+      ? "admin-home.html"
+      : "home.html";
+};
