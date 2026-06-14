@@ -1,3 +1,5 @@
+package com.familystar.app
+
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -14,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
 
-        // 👉 YOUR WEBSITE LINK HERE
+        // 🔥 YOUR LIVE WEBSITE LINK HERE
         webView.loadUrl("https://your-github-pages-link.com")
     }
 }
