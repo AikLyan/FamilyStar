@@ -3,7 +3,7 @@ import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/
 
 const user = localStorage.getItem("user");
 
-const today = new Date().toLocaleDateString("en-CA");
+if (!user) location.href = "index.html";
 
 async function loadTickets() {
 
