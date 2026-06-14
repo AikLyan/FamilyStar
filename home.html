@@ -118,40 +118,173 @@ color:#1d4ed8;
 <body>
 
 <script>
-if(localStorage.getItem("role") !== "user"){
-window.location.href="index.html";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Family Star</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:system-ui,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+padding-bottom:30px;
+}
+
+.header{
+background:linear-gradient(135deg,#1e3a8a,#2563eb);
+padding:25px 20px;
+text-align:center;
+color:white;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+}
+
+.header h2{
+font-size:30px;
+}
+
+.balance-box{
+width:92%;
+margin:20px auto;
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+text-align:center;
+position:relative;
+}
+
+#username{
+font-size:20px;
+font-weight:bold;
+color:#111827;
+}
+
+#balance{
+font-size:34px;
+font-weight:bold;
+color:#1e3a8a;
+margin-top:10px;
+}
+
+#point{
+position:absolute;
+right:15px;
+bottom:15px;
+background:#dbeafe;
+padding:5px 12px;
+border-radius:10px;
+font-size:13px;
+font-weight:bold;
+color:#1e3a8a;
+}
+
+.menu-grid{
+width:92%;
+margin:20px auto;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:22px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+cursor:pointer;
+transition:.2s;
+}
+
+.card:active{
+transform:scale(.97);
+}
+
+.icon{
+font-size:42px;
+}
+
+.title{
+margin-top:10px;
+font-weight:bold;
+font-size:16px;
+color:#1e3a8a;
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+const user = localStorage.getItem("user");
+
+if(!user){
+location.href="index.html";
 }
 </script>
 
 <div class="header">
+<h2>Family Star</h2>
+</div>
 
-<div class="logo">
-  <span class="family">Family</span>
-  <span class="star">Star
-    <span class="badge">★</span>
-  </span>
+<div class="balance-box">
+
+<div id="username">
+Loading...
+</div>
+
+<div id="balance">
+0 MMK
+</div>
+
+<div id="point">
+0 PT
 </div>
 
 </div>
 
-<div class="card">
-<div id="username"></div>
-<div id="balance">0 MMK</div>
+<div class="menu-grid">
+
+<div class="card" onclick="location.href='wallet.html'">
+<div class="icon">💰</div>
+<div class="title">Wallet</div>
 </div>
 
-<div class="menu">
+<div class="card" onclick="location.href='ride.html'">
+<div class="icon">🚌</div>
+<div class="title">Ride</div>
+</div>
 
-<div class="item">🚗 Ride</div>
-<div class="item">💰 Wallet</div>
-<div class="item">📦 Delivery</div>
-<div class="item">🎫 Ticket</div>
+<div class="card" onclick="location.href='shop.html'">
+<div class="icon">🛒</div>
+<div class="title">Shop</div>
+</div>
+
+<div class="card" onclick="location.href='ticket.html'">
+<div class="icon">🎫</div>
+<div class="title">My Tickets</div>
+</div>
+
+<div class="card" onclick="location.href='myorders.html'">
+<div class="icon">📦</div>
+<div class="title">My Orders</div>
+</div>
 
 </div>
 
-<script>
-document.getElementById("username").innerText =
-"Welcome " + localStorage.getItem("username");
-</script>
+<script type="module" src="home.js"></script>
 
 </body>
-  </html>
+</html>
