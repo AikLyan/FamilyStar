@@ -5,132 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Family Star</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:system-ui;
-}
-
-body{
-background:#f3f6ff;
-padding-bottom:80px;
-}
-
-/* HEADER */
-.header{
-background:#2563eb;
-color:white;
-padding:22px;
-text-align:center;
-border-bottom-left-radius:25px;
-border-bottom-right-radius:25px;
-}
-
-/* USER CARD */
-.card{
-width:92%;
-margin:15px auto;
-background:white;
-border-radius:20px;
-padding:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-text-align:center;
-position:relative;
-}
-
-#username{
-font-size:20px;
-font-weight:bold;
-}
-
-#balance{
-font-size:36px;
-color:#1d4ed8;
-font-weight:bold;
-margin-top:10px;
-}
-
-#point{
-position:absolute;
-right:12px;
-bottom:12px;
-background:#dbeafe;
-padding:5px 10px;
-border-radius:12px;
-font-size:12px;
-color:#1d4ed8;
-}
-
-/* ADS SLIDER */
-.slider{
-width:92%;
-margin:15px auto;
-overflow:hidden;
-border-radius:15px;
-}
-
-.slides{
-display:flex;
-width:300%;
-animation:slide 9s infinite;
-}
-
-.slide{
-width:100%;
-flex-shrink:0;
-padding:20px;
-color:white;
-font-weight:bold;
-text-align:center;
-font-size:18px;
-}
-
-.s1{background:#ef4444;}
-.s2{background:#10b981;}
-.s3{background:#f59e0b;}
-
-@keyframes slide{
-0%{transform:translateX(0);}
-33%{transform:translateX(-100%);}
-66%{transform:translateX(-200%);}
-100%{transform:translateX(0);}
-}
-
-/* MENU */
-.menu{
-width:92%;
-margin:20px auto;
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-}
-
-.item{
-background:white;
-padding:20px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 6px 15px rgba(0,0,0,0.08);
-}
-
-.circle{
-width:60px;
-height:60px;
-margin:0 auto 10px;
-border-radius:50%;
-background:#e0e7ff;
-display:flex;
-justify-content:center;
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family Star</title>
-
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
 <style>
 *{
@@ -149,11 +24,9 @@ padding-bottom:80px;
 .header{
 background:#1e40af;
 color:white;
-padding:22px;
+padding:20px;
 text-align:center;
 font-weight:bold;
-border-bottom-left-radius:25px;
-border-bottom-right-radius:25px;
 }
 
 /* CARD */
@@ -163,9 +36,9 @@ margin:15px auto;
 background:linear-gradient(135deg,#2563eb,#1e3a8a);
 color:white;
 padding:22px;
-border-radius:20px;
+border-radius:18px;
+text-align:center;
 position:relative;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 #username{
@@ -174,7 +47,7 @@ opacity:0.9;
 }
 
 #balance{
-font-size:40px;
+font-size:38px;
 font-weight:bold;
 margin-top:10px;
 }
@@ -189,25 +62,6 @@ border-radius:10px;
 font-size:12px;
 }
 
-/* ADS SLIDER */
-.ads{
-width:92%;
-margin:15px auto;
-background:white;
-padding:15px;
-border-radius:15px;
-text-align:center;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
-animation:fade 9s infinite;
-}
-
-@keyframes fade{
-0%{opacity:1;}
-33%{opacity:0.5;}
-66%{opacity:1;}
-}
-
 /* MENU */
 .menu{
 width:92%;
@@ -219,15 +73,34 @@ gap:15px;
 
 .item{
 background:white;
-padding:18px;
-border-radius:18px;
+padding:20px;
+border-radius:15px;
 text-align:center;
 box-shadow:0 6px 15px rgba(0,0,0,0.08);
-transition:0.3s;
+transition:0.2s;
+font-weight:600;
 }
 
 .item:hover{
 transform:scale(1.05);
+}
+
+.icon{
+width:55px;
+height:55px;
+margin:auto;
+border-radius:50%;
+background:#dbeafe;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-bottom:8px;
+}
+
+/* ICON STYLE */
+.material-symbols-rounded{
+font-size:28px;
+color:#1d4ed8;
 }
 
 /* FOOTER */
@@ -240,8 +113,8 @@ background:white;
 display:flex;
 justify-content:space-around;
 padding:10px;
-box-shadow:0 -5px 15px rgba(0,0,0,0.08);
 font-size:12px;
+box-shadow:0 -5px 15px rgba(0,0,0,0.08);
 }
 </style>
 </head>
@@ -265,68 +138,41 @@ window.location.href="index.html";
 <div id="point">0 PT</div>
 </div>
 
-<!-- ADS -->
-<div class="ads" id="ads">🔥 Welcome Bonus Available</div>
-
-<!-- MENU (LOTTIE) -->
+<!-- MENU -->
 <div class="menu">
 
 <div class="item">
-<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jtbfg2nb.json"
-background="transparent" speed="1"
-style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
+<div class="icon"><span class="material-symbols-rounded">directions_car</span></div>
 Ride
 </div>
 
 <div class="item">
-<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_5tkzkblw.json"
-background="transparent" speed="1"
-style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
+<div class="icon"><span class="material-symbols-rounded">account_balance_wallet</span></div>
 Wallet
 </div>
 
 <div class="item">
-<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json"
-background="transparent" speed="1"
-style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
+<div class="icon"><span class="material-symbols-rounded">local_shipping</span></div>
 Delivery
 </div>
 
 <div class="item">
-<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_touohxv0.json"
-background="transparent" speed="1"
-style="width:70px;height:70px;margin:auto" loop autoplay></lottie-player>
+<div class="icon"><span class="material-symbols-rounded">confirmation_number</span></div>
 Ticket
 </div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-<div>🏠 Home</div>
-<div>💰 Wallet</div>
-<div>🛒 Orders</div>
-<div>👤 Profile</div>
+<div>Home</div>
+<div>Wallet</div>
+<div>Orders</div>
+<div>Profile</div>
 </div>
-
-<script src="home.js"></script>
 
 <script>
 document.getElementById("username").innerText =
 "Welcome " + localStorage.getItem("username");
-
-/* ADS ROTATION */
-const ads = [
-"🔥 Welcome Bonus Available",
-"💰 Earn Daily Rewards",
-"🚀 Fast Delivery System"
-];
-
-let i = 0;
-setInterval(()=>{
-i = (i+1)%ads.length;
-document.getElementById("ads").innerText = ads[i];
-},3000);
 </script>
 
 </body>
