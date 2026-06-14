@@ -1,15 +1,11 @@
 import { db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-window.login = async function () {
+const username = localStorage.getItem("user");
 
-  const username = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+if (!username) location.href = "index.html";
 
-  if (!username || !password) {
-    alert("Fill all fields");
-    return;
-  }
+async function load() {
 
   const ref = doc(db, "users", username);
   const snap = await getDoc(ref);
@@ -19,20 +15,11 @@ window.login = async function () {
     return;
   }
 
-  const data = snap.data();
+  const d = snap.data();
 
-  if (data.password !== password) {
-    alert("Wrong password");
-    return;
-  }
+  document.getElementById("username").innerText = username;
+  document.getElementById("balance").innerText = (d.balance || 0) + " MMK";
+  document.getElementById("point").innerText = (d.point || 0) + " PT";
+}
 
-  localStorage.setItem("user", username);
-  localStorage.setItem("role", data.role);
-
-  alert("Login Success");
-
-  location.href =
-    data.role === "admin"
-      ? "admin-home.html"
-      : "home.html";
-};
+load();
