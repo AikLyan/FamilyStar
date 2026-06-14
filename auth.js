@@ -1,26 +1,25 @@
-window.login = function () {
+import { db } from "./firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-  const u = document.getElementById("username").value.trim();
-  const p = document.getElementById("password").value.trim();
+window.login = async function () {
 
-  if (!u || !p) {
-    alert("Fill all fields");
-    return;
-  }
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
 
-  if (u === "admin" && p === "1234") {
-    localStorage.setItem("username", u);
-    localStorage.setItem("role", "admin");
-    window.location.href = "admin.html";
-    return;
-  }
+  if (!user || !pass) return alert("Fill all fields");
 
-  if (u === "user" && p === "1234") {
-    localStorage.setItem("username", u);
-    localStorage.setItem("role", "user");
-    window.location.href = "home.html";
-    return;
-  }
+  const snap = await getDoc(doc(db, "users", user));
 
-  alert("Wrong login");
+  if (!snap.exists()) return alert("User not found");
+
+  const data = snap.data();
+
+  if (data.password !== pass) return alert("Wrong password");
+
+  localStorage.setItem("user", user);
+  localStorage.setItem("role", data.role || "user");
+
+  location.href = data.role === "admin"
+    ? "admin-home.html"
+    : "home.html";
 };
